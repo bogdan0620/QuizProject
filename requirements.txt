@@ -1,0 +1,6 @@
+flask
+typing
+pydantic
+aiogram
+requests
+flask_sqlalchemy
