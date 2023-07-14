@@ -9,7 +9,7 @@ def get_rating_db(level):
 
 
 # добавление ответа пользователя
-def add_user_answer_db(user_id, user_answer, correctness):
+def add_user_answer_db(user_id, user_answers, correctness):
     add_user_answer = Result.query.all()
     return add_user_answer
 
@@ -30,8 +30,8 @@ def add_user_rating_db(user_id, correct_answer, level):
     db.session.commit()
 
 
-def get_user_position(user_id, level, correct_answers):
-    register_user_rating = add_user_rating_db(user_id, correct_answers, level)
-    user_position = Rating.query.order_by(Rating.user_correct_answer.desc()).filter_by(level=level)
+def get_user_position(user_id, correct_answers, level):
+    add_user_rating_db(user_id, correct_answers, level)
+    user_position = Rating.query.order_by(Rating.user_correct_answers.desc()).filter_by(level=level)
     user_ids = [i.user_id for i in user_position]
     return user_ids.index(user_id) + 1
